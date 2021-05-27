@@ -86,7 +86,7 @@ window.onload = function () {
 const options = {
     root: null,
     rootMargin: "0px",
-    threshold: 0.6
+    threshold: 0.7
 }
 
 // Callback method for Intersection Observer, Handles the activation logic
@@ -118,11 +118,32 @@ window.addEventListener('scroll', function () {
  * Nav activation functionality END.
 */
 
+// Hamburger menu toggle
 const toggleMenu = () => {
     uiElementsObj.hamburgerMenu.classList.toggle('fa-bars');
     uiElementsObj.hamburgerMenu.classList.toggle('fa-times');
     uiElementsObj.navbar.classList.toggle('slide');
     document.body.classList.toggle('stop');
 }
-
+// Hamburger menu click event
 uiElementsObj.hamburgerMenu.addEventListener('click', toggleMenu);
+
+
+// Function to handle background slow scroll effect
+(function () {
+
+    var parallax = document.querySelectorAll("body"),
+        speed = 0.3;
+
+    window.onscroll = function () {
+        [].slice.call(parallax).forEach(function (el, i) {
+
+            var windowYOffset = window.pageYOffset,
+                elBackgrounPos = "50% " + (windowYOffset * speed) + "px";
+
+            el.style.backgroundPosition = elBackgrounPos;
+
+        });
+    };
+
+})();
