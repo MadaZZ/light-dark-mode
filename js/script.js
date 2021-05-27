@@ -4,7 +4,8 @@ const uiElementsObj = {
     navbar: document.getElementById('nav'),
     toggleIcon: document.getElementById('toggle-icon'),
     textBox: document.getElementById('text-box'),
-    images: document.getElementsByTagName('img')
+    images: document.getElementsByTagName('img'),
+    sections: document.getElementsByTagName('section')
 }
 
 /** 
@@ -41,7 +42,7 @@ themeSwitch.addEventListener('change', (e) => {
  * Method to Create a navbar dynamically, depends on the sections in the HTML.
  */
 const createNavbar = () => {
-    const sections = Array.from(document.getElementsByTagName('section'));
+    const sections = Array.from(uiElementsObj.sections);
     const navbar = document.getElementById('nav');
     const frag = document.createDocumentFragment();
     sections.forEach(element => {
@@ -50,8 +51,8 @@ const createNavbar = () => {
         a.textContent = element.id.toUpperCase();
 
         // Added smooth scroll using js
-        a.addEventListener('click', function(){
-            element.scrollIntoView({ behavior: "smooth"});
+        a.addEventListener('click', function () {
+            element.scrollIntoView({ behavior: "smooth" });
         });
 
         frag.appendChild(a);
@@ -74,3 +75,45 @@ window.onload = function () {
         toggleDarkLightMode(false);
     }
 }
+
+/**
+ * Nav activation functionality START.
+ */
+
+// Config for intersection observer
+const options = {
+    root: null,
+    rootMargin: "0px",
+    threshold: 0.6
+}
+
+// Callback method for Intersection Observer, Handles the activation logic
+const callback = (entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            let id = entry.target.id;
+            const navElements = Array.from(document.getElementsByTagName('a'));
+            navElements.forEach(ele => {
+                if (ele.textContent === id.toUpperCase()) {
+                    ele.classList.add('active');
+                } else {
+                    ele.classList.remove('active');
+                }
+            })
+        }
+    });
+};
+
+// Defined the observer
+const observer = new IntersectionObserver(callback, options);
+
+// Trigger the activation logic on scroll event.
+window.addEventListener('scroll', function () {
+    const sections = Array.from(uiElementsObj.sections);
+    sections.forEach(section => observer.observe(section))
+})
+/**
+ * Nav activation functionality END.
+*/
+
+
