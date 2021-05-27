@@ -37,8 +37,35 @@ themeSwitch.addEventListener('change', (e) => {
 });
 
 
+/**
+ * Method to Create a navbar dynamically, depends on the sections in the HTML.
+ */
+const createNavbar = () => {
+    const sections = Array.from(document.getElementsByTagName('section'));
+    const navbar = document.getElementById('nav');
+    const frag = document.createDocumentFragment();
+    sections.forEach(element => {
+        let a = document.createElement('a');
+        // a.setAttribute('href', `#${element.id.toLowerCase()}`); // No need of href property, due to js scroll implementation
+        a.textContent = element.id.toUpperCase();
+
+        // Added smooth scroll using js
+        a.addEventListener('click', function(){
+            element.scrollIntoView({ behavior: "smooth"});
+        });
+
+        frag.appendChild(a);
+    });
+    navbar.appendChild(frag);
+}
+
 // Set the mode onload of the application
 window.onload = function () {
+
+    // Call to create navbar
+    createNavbar();
+
+    // Change the mode of site according to saved preference
     let mode = window.localStorage.getItem('mode');
     if (mode === 'dark') {
         themeSwitch.checked = true;
