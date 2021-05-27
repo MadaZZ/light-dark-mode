@@ -5,7 +5,8 @@ const uiElementsObj = {
     toggleIcon: document.getElementById('toggle-icon'),
     textBox: document.getElementById('text-box'),
     images: document.getElementsByTagName('img'),
-    sections: document.getElementsByTagName('section')
+    sections: document.getElementsByTagName('section'),
+    hamburgerMenu: document.getElementById('hamburger')
 }
 
 /** 
@@ -53,6 +54,7 @@ const createNavbar = () => {
         // Added smooth scroll using js
         a.addEventListener('click', function () {
             element.scrollIntoView({ behavior: "smooth" });
+            toggleMenu();
         });
 
         frag.appendChild(a);
@@ -116,4 +118,11 @@ window.addEventListener('scroll', function () {
  * Nav activation functionality END.
 */
 
+const toggleMenu = () => {
+    uiElementsObj.hamburgerMenu.classList.toggle('fa-bars');
+    uiElementsObj.hamburgerMenu.classList.toggle('fa-times');
+    uiElementsObj.navbar.classList.toggle('slide');
+    document.body.classList.toggle('stop');
+}
 
+uiElementsObj.hamburgerMenu.addEventListener('click', toggleMenu);

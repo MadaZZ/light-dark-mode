@@ -268,3 +268,47 @@ input:checked + .slider::before {
   margin-right: 5px;
   color: var(--on-background);
 }
+
+#hamburger {
+  z-index: 100;
+  position: fixed;
+  left: 25px;
+  top: 30px;
+  display: none;
+}
+
+@media only screen and (max-width: 850px) {
+  #hamburger {
+    display: block;
+    cursor: pointer;
+  }
+
+  #nav {
+    position: fixed;
+    left: -200%;
+    display: flex;
+    flex-direction: column;
+    background-color: #fff;
+    width: 100%;
+    border-radius: 10px;
+    text-align: center;
+    transition: 0.3s;
+    /* box-shadow: 0 10px 27px rgba(0, 0, 0, 0.05); */
+    height: 100%;
+    top: 0;
+  }
+
+  #nav.slide {
+    left: 0;
+  }
+
+  a {
+    margin: 2.5rem 0;
+  }
+
+  body.stop{
+    height: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+}
