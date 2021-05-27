@@ -313,3 +313,23 @@ input:checked + .slider::before {
     overflow-x: hidden;
   }
 }
+
+@media only screen and (max-width: 1000px) {
+  .about-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+  }
+  .image-container{
+    max-width: 320px;
+    margin: 20px;
+  }
+
+  section {
+    width: 100%;
+  }
+  h1{
+    font-size: 4rem;
+  }
+}
